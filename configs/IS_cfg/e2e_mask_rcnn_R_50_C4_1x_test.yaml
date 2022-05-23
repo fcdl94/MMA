@@ -1,0 +1,45 @@
+MODEL:
+  META_ARCHITECTURE: "GeneralizedRCNN"
+  WEIGHT: "output/mask_JT_36Kiter_LR005_BS4/model_final.pth"
+  #  WEIGHT: "catalog://ImageNetPretrained/MSRA/R-50"
+  BACKBONE:
+    CONV_BODY: "R-50-C4"
+  RESNETS:
+    BACKBONE_OUT_CHANNELS: 1024
+  RPN:
+    ANCHOR_STRIDE: (16,)
+    PRE_NMS_TOP_N_TEST: 6000
+    POST_NMS_TOP_N_TEST: 1000
+  ROI_HEADS:
+    USE_FPN: False
+  ROI_BOX_HEAD:
+    NUM_CLASSES: 21 # total classes : 15 + 1
+    NAME_OLD_CLASSES:  []
+    NAME_NEW_CLASSES: [ "aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow" ,
+                        "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor" ]
+    NAME_EXCLUDED_CLASSES: []
+  MASK_ON: True
+  ROI_MASK_HEAD:
+    PREDICTOR: "MaskRCNNC4Predictor"
+    SHARE_BOX_FEATURE_EXTRACTOR: True
+    POSTPROCESS_MASKS: True
+DATASETS:
+  TRAIN: ("voc_2012_train",)
+  TEST: ("voc_2012_test",)
+DATALOADER:
+  SIZE_DIVISIBILITY: 32
+  NUM_WORKERS: 0
+SOLVER:
+  BASE_LR: 0.004 # start learning rate
+  WEIGHT_DECAY: 0.0001
+  GAMMA: 0.1  # learning rate decay
+  STEPS: (12500,21000)
+  MAX_ITER: 25000 #40000 # number of iteration
+  CHECKPOINT_PERIOD: 5000 # number of iteration to generate check point
+  IMS_PER_BATCH: 1 # number of images per batch
+  MOMENTUM: 0.9
+TEST: # testing strategy
+  IMS_PER_BATCH: 1 # number of images per batch
+OUTPUT_DIR: "output/mask_JT_36Kiter_LR005_BS4_tx" # path to store the result
+TENSORBOARD_DIR: "output/mask_JT_36Kiter_LR005_BS4_tx/tb" # path to store tensorboard info
+INCREMENTAL: False
