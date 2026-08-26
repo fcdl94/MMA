@@ -1,3 +1,5 @@
+
+
 # Modeling Missing Annotations for Incremental Learning in Object Detection -- @CVPR 22, [CLVision Workshop](https://sites.google.com/view/clvision2022) [Paper](https://arxiv.org/abs/2204.08766)
 
 ## Official PyTorch implementatation based on Detetron (v1) - Fabio Cermelli, Antonino Geraci, Dario Fontanel, Barbara Caputo
@@ -10,7 +12,7 @@ Despite the recent advances in the field of object detection, common architectur
 
 # How to run
 ## Install
-Please, follow the instruction provided by Detectron 1 and found in install.md
+Please, follow the instruction provided by Detectron 1 and found in INSTALL.md
 
 ## Dataset
 You can find the Pascal-VOC dataset already in Detectron. Pascal-SBD, used in instance segmentation, can be found in the `data` folder.
